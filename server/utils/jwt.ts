@@ -19,11 +19,11 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
   //parse enviroment varable to integrates with fallback
   const accessTokenExpire = parseInt(
     process.env.ACCESS_TOKEN_EXPIRE || "300",
-    100
+    10
   );
   const refreshTokenExpire = parseInt(
     process.env.REFRESH_TOKEN_EXPIRE || "1200",
-    100
+    10
   );
   const accessTokenOptions: ITokenOptions = {
     expires: new Date(Date.now() + accessTokenExpire * 1000),
