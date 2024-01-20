@@ -48,7 +48,7 @@ interface ICourse extends Document {
   purchased?: number;
 }
 
-const reviewScheme = new Schema({
+const reviewScheme = new Schema<IReview>({
   user: Object,
   rating: {
     type: Number,
@@ -70,7 +70,6 @@ const commentSchema = new Schema<IComment>({
 
 const courseDataSchema = new Schema<ICourseData>({
   videoUrl: String,
-  videoThumbnail: Object,
   title: String,
   videoSection: String,
   description: String,
@@ -100,11 +99,9 @@ const courseSchema = new Schema<ICourse>({
   },
   thumbnail: {
     public_id: {
-      required: true,
       type: String,
     },
     url: {
-      required: true,
       type: String,
     },
   },
@@ -126,7 +123,7 @@ const courseSchema = new Schema<ICourse>({
   courseData: [courseDataSchema],
   ratings: {
     url: {
-      required: Number,
+      type: Number,
       default: 0,
     },
   },
@@ -136,6 +133,6 @@ const courseSchema = new Schema<ICourse>({
   },
 });
 
-const CourModel: Model<ICourse> = mongoose.model("Course", courseSchema);
+const CourseModel: Model<ICourse> = mongoose.model("Course", courseSchema);
 
-export default CourModel;
+export default CourseModel;
