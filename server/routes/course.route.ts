@@ -4,6 +4,7 @@ import {
   uploadCourse,
   getSingleCourse,
   getAllCourses,
+  getCourseByUser,
 } from "../controllers/course.controller";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
 //const courseRouter = express.Router();
@@ -27,5 +28,7 @@ courseRouter.put(
 courseRouter.get("/get-course/:id", getSingleCourse);
 
 courseRouter.get("/get-courses", getAllCourses);
+
+courseRouter.get("/get-course-content/:id", isAuthenticated, getCourseByUser);
 
 export default courseRouter;
