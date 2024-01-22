@@ -213,17 +213,17 @@ export const addAnswer = CatchAsyncError(
         return next(new ErrorHandler("Invalid content id ", 400));
       }
 
-      const courseContent = course?.courseData?.find((item: any) => {
-        item._id.equals(contentId);
-      });
+      const courseContent = course?.courseData?.find((item: any) =>
+        item._id.equals(contentId)
+      );
 
       if (!courseContent) {
         return next(new ErrorHandler("Invalid content id 2", 400));
       }
 
-      const question = courseContent?.questions?.find((item: any) => {
-        item._id.equals(quesionId);
-      });
+      const question = courseContent?.questions?.find((item: any) =>
+        item._id.equals(quesionId)
+      );
 
       if (!question) return next(new ErrorHandler("Invalid quesion id", 400));
 
@@ -246,7 +246,7 @@ export const addAnswer = CatchAsyncError(
         };
 
         const html = await ejs.renderFile(
-          path.join(__dirname, "../mails/quesion-reply.ejs"),
+          path.join(__dirname, "../mails/question-reply.ejs"),
           data
         );
 
@@ -254,14 +254,14 @@ export const addAnswer = CatchAsyncError(
           await sendMail({
             email: question.user.email,
             subject: "Reply on Question",
-            template: "quesion-reply.ejs",
+            template: "question-reply.ejs",
             data,
           });
         } catch (error: any) {
           return next(new ErrorHandler(error.message, 500));
         }
       }
-      res.send(200).json({
+      res.status(200).json({
         success: true,
         course,
       });
