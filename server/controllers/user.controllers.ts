@@ -158,7 +158,7 @@ export const logoutUser = CatchAsyncError(
       const userId = req.user?._id || "";
       redis.del(userId);
       res.status(200).json({
-        sucess: true,
+        success: true,
         message: "Logged out sucessfully",
       });
     } catch (error: any) {
