@@ -11,8 +11,10 @@ import {
   updateUserInfo,
   updateProfilePicture,
   getAllUsers,
+  updateUserRole,
 } from "../controllers/user.controllers";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
+import { updateUserRoleService } from "../services/user.service";
 const userRouter = express.Router();
 
 userRouter.post("/registration", resgistrationUser);
@@ -30,6 +32,12 @@ userRouter.get(
   isAuthenticated,
   authorizeRoles("admin"),
   getAllUsers
+);
+userRouter.put(
+  "/update-user",
+  isAuthenticated,
+  authorizeRoles("admin"),
+  updateUserRole
 );
 
 export default userRouter;
