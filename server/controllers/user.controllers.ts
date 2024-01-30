@@ -184,7 +184,10 @@ export const updateAccessToken = CatchAsyncError(
       const message = "Could not refresh token";
       if (!decode) return next(new ErrorHandler(message, 400));
       const session = await redis.get(decoded.id as string);
-      if (!session) return next(new ErrorHandler(message, 400));
+      if (!session)
+        return next(
+          new ErrorHandler("Please login for access this resources", 400)
+        );
       const user = JSON.parse(session);
       const accessToken = jwt.sign(
         { id: user._id },
@@ -207,6 +210,8 @@ export const updateAccessToken = CatchAsyncError(
       res.cookie("access_token", accessToken, accessTokenOptions);
 
       res.cookie("refresh_token", refreshToken, refreshTokenOptions);
+
+      await redis.set(user._id, JSON.stringify(user), "EX", 604800); //session expires in 7 day (7 day into sec is 604800)
 
       res.status(200).json({
         status: "success",
