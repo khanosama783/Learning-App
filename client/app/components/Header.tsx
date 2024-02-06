@@ -115,7 +115,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
 
       {route === "Sign-Up" && (
         <>
-          {open && (
+          {
+          open && (
             <CustomModel
               open={open}
               setOpen={setOpen}
