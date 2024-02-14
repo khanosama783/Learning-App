@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FC } from "react";
-import { styles } from "../../../app/styles/styles";
+import { styles } from "../../styles/styles";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast/headless";
 //import { useRegisterMutation } from "@/redux/features/auth/authApi";
@@ -29,29 +29,30 @@ const schema = Yup.object().shape({
 const SignUp: FC<Props> = ({ setRoute }) => {
   const [show, setShow] = useState(false);
   const [register, { isError, data, error, isSuccess }] = useRegisterMutation();
-  useEffect(()=> {
-    if(isSuccess) {
+  useEffect(() => {
+    if (isSuccess) {
       const message = data?.message || "Registration successful";
       toast.success(message);
       setRoute("Verification");
     }
-    if(error) {
-      if("data" in error) {
+    if (error) {
+      if ("data" in error) {
         const errorData = error as any;
-        toast.error(errorData.data.message)
+        toast.error(errorData.data.message);
       }
     }
   }, [isSuccess, error]);
 
-
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },
     validationSchema: schema,
-    onSubmit: async ({name, email, password }) => {
+    onSubmit: async ({ name, email, password }) => {
       const data = {
-        name, email, password
-      }
-      await register(data)
+        name,
+        email,
+        password,
+      };
+      await register(data);
     },
   });
 
@@ -77,7 +78,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             }`}
           />
           {errors.name && touched.name && (
-            <span className="text-red-500 pt-2 block">{errors.email}</span>
+            <span className="text-red-500 pt-2 block">{errors.name}</span>
           )}
         </div>
         <label className={`${styles.label}`} htmlFor="email">
@@ -130,11 +131,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           <span className="text-red-500 pt-2 block">{errors.password}</span>
         )}
         <div className="w-full mt-5">
-          <input
-            type="submit "
-            value="Sign Up"
-            className={`${styles.button}`}
-          />
+          <input type="submit" value="Sign Up" className={`${styles.button}`} />
         </div>
         <br />
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">

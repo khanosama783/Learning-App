@@ -89,7 +89,7 @@ const Verification: FC<Props> = ({ setRoute }) => {
       <div className="m-auto flex items-center justify-around">
         {Object.keys(verifyNumber).map((key, index) => (
           <input
-            type="number"
+            type='number'
             key={key}
             ref={inputRefs[index]}
             className={`w-[65px] h-[65px] bg-transparent border-[3px] rounded-[10px] flex items-center text-black dark:text-white justify-center text-[18px] font-Poppins outline-none text-center ${
@@ -97,7 +97,7 @@ const Verification: FC<Props> = ({ setRoute }) => {
                 ? "shake border-red-500"
                 : "dark:border-white border-[#0000004a]"
             }`}
-            placeholder=""
+            placeholder=''
             maxLength={1}
             value={verifyNumber[key as keyof VerifyNumber]}
             onChange={(e) => handleInputChange(index, e.target.value)}
