@@ -32,7 +32,7 @@ const Login: FC<Props> = ({ setRoute }) => {
     },
   });
 
-  const { errors, touched, values, handleChange, handleSubmit } = formik;
+const { errors, touched, values, handleChange, handleSubmit } = formik;
 
   return (
     <div className="w-full">
@@ -88,7 +88,7 @@ const Login: FC<Props> = ({ setRoute }) => {
           )}
         </div>
         <div className="w-full mt-5">
-          <input type="submit " value="Login" className={`${styles.button}`} />
+          <input type="submit" value="Login" className={`${styles.button}`} />
         </div>
         <br />
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-black dark:text-white">
