@@ -10,7 +10,7 @@ export const isAuthenticated = CatchAsyncError(
     const access_token = req.cookies.access_token;
     if (!access_token)
       return next(
-        new ErrorHandler("please login to access this resource", 400)
+        new ErrorHandler("Please login to access this resource", 400)
       );
 
     const decoded = jwt.verify(
@@ -24,7 +24,7 @@ export const isAuthenticated = CatchAsyncError(
     const user = await redis.get(decoded.id);
 
     if (!user)
-      return next(new ErrorHandler("Please login o access this resource", 400));
+      return next(new ErrorHandler("Please login to access this resource", 400));
 
     req.user = JSON.parse(user);
 
