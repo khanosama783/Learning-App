@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { FC, Profiler, useState } from "react";
 import Protected from "../hooks/useProtected";
 import Heading from "../utils/Heading";
@@ -12,7 +12,7 @@ const Page: FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(5);
   const [route, setRoute] = useState("Login");
-  const {user} = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
   return (
     <div>
       <Protected>
