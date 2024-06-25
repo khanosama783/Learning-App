@@ -132,7 +132,7 @@ const AdminSidebar = () => {
           </MenuItem>
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="content" alignItems="center">
+              <Box display="flex" justifyContent="center" alignItems="center">
                 <Image
                   alt="profile-user"
                   width={100}
