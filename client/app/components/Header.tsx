@@ -11,7 +11,6 @@ import Verification from "../components/Auth/Verification";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import avatar from "../../public/assests/avatar.png";
-import { Kadwa } from "next/font/google";
 import { useSession } from "next-auth/react";
 import { useSocialAuthMutation } from "@/redux/features/auth/authApi";
 import { useEffect } from "react";
