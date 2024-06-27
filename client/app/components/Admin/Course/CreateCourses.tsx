@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import CourseInformation from "./CourseInformation";
 import CourseOptions from "./CourseOptions";
 import CourseData from "./CourseData";
+import CourseContent from "./CourseContent";
 
 type Props = {};
 
 const CreateCourses = (props: Props) => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
 
   const [courseInfo, setCourseInfo] = useState({
     name: "",
@@ -42,6 +43,10 @@ const CreateCourses = (props: Props) => {
 
   const [courseData, setCourseData] = useState({});
 
+  const handleSumbit = async () => {
+
+  }
+
   return (
     <div className="w-full flex min-h-screen">
       <div className="w-[80%]">
@@ -62,6 +67,15 @@ const CreateCourses = (props: Props) => {
             setPrerequisites={setPrerequisites}
             active={active}
             setActive={setActive}
+          />
+        )}
+        {active === 2 && (
+          <CourseContent
+            active={active}
+            setActive={setActive}
+            courseContentData={courseContentData}
+            setCourseContentData={setCourseContentData}
+            handleSubmit={handleSumbit}
           />
         )}
       </div>
