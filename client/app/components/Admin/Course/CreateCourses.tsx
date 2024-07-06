@@ -1,15 +1,15 @@
 "use client";
-import { title } from "process";
 import React, { useState } from "react";
 import CourseInformation from "./CourseInformation";
 import CourseOptions from "./CourseOptions";
 import CourseData from "./CourseData";
 import CourseContent from "./CourseContent";
+import CoursePreview from "./CoursePreview";
 
 type Props = {};
 
 const CreateCourses = (props: Props) => {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(3);
 
   const [courseInfo, setCourseInfo] = useState({
     name: "",
@@ -44,8 +44,43 @@ const CreateCourses = (props: Props) => {
   const [courseData, setCourseData] = useState({});
 
   const handleSumbit = async () => {
+    const formattedBenefits = benefits.map((benefit) => ({title: benefit.title}));
+    const formattedPrerequisites = prerequisites.map((prerequisite) => ({
+      title: prerequisite.title
+    }));
+    const formattedCourseContentData = courseContentData.map((courseContentData) => ({
+      videoUrl: courseContentData.videoUrl,
+      title: courseContentData.title,
+      description: courseContentData.description,
+      videoSection: courseContentData.videoSection,
+      links: courseContentData.links.map((link) => ({
+        title: link.title,
+        url: link.url,
+      })),
+      suggesion: courseContentData.suggestion,
+    }));
+    
+    const data = {
+      name: courseInfo.name,
+      describe: courseInfo.description,
+      price: courseInfo.price,
+      estimatedPrice: courseInfo.estimatedPrice,
+      tags: courseInfo.tags,
+      thumbnail: courseInfo.thumbnail,
+      level: courseInfo.level,
+      demoUrl: courseInfo.demoUrl,
+      totalVideos: courseContentData.length,
+      benefits: formattedBenefits,
+      prerequisites: formattedPrerequisites,
+      courseContentData: formattedCourseContentData,
+    }
+    setCourseData(data);
+  };
 
+  const handleCourseCreate = async (e:any) => {
+    const data = courseData;
   }
+
 
   return (
     <div className="w-full flex min-h-screen">
@@ -76,6 +111,15 @@ const CreateCourses = (props: Props) => {
             courseContentData={courseContentData}
             setCourseContentData={setCourseContentData}
             handleSubmit={handleSumbit}
+          />
+        )}
+
+        {active === 3 && (
+          <CoursePreview
+            active={active}
+            setActive={setActive}
+            courseData={courseData}
+            handleCourseCreate={handleCourseCreate}
           />
         )}
       </div>
